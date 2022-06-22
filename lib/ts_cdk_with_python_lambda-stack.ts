@@ -8,6 +8,7 @@ export class TsCdkWithPythonLambdaStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
+    // Python Lambda Function
     const myPython = new PythonFunction(this, 'MyPythonHandler', {
       entry: './lambda_python',  // Folder containing lambda
       runtime: lambda.Runtime.PYTHON_3_9,  // Python version
@@ -15,7 +16,7 @@ export class TsCdkWithPythonLambdaStack extends Stack {
       handler: 'handler'  // Name of method
     });
 
-    // API Gateway Python2
+    // API Gateway
     new apigw.LambdaRestApi(this, 'MyPythonEndpoint', {
       handler: myPython
     })
